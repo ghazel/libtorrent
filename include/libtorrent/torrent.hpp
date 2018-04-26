@@ -41,6 +41,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <limits> // for numeric_limits
 #include <memory> // for unique_ptr
 
+#include "libtorrent/fwd.hpp"
 #include "libtorrent/optional.hpp"
 #include "libtorrent/torrent_handle.hpp"
 #include "libtorrent/entry.hpp"
@@ -100,14 +101,7 @@ namespace ssl {
 namespace libtorrent {
 
 	class http_parser;
-
-	struct storage_interface;
-	struct torrent_plugin;
-	template <typename Index> struct typed_bitfield;
-	struct announce_entry;
 	struct tracker_request;
-	struct add_torrent_params;
-	struct storage_interface;
 	class bt_peer_connection;
 
 	peer_id generate_peer_id(aux::session_settings const& sett);

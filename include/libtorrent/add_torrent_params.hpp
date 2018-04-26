@@ -56,6 +56,8 @@ namespace libtorrent {
 	struct torrent_plugin;
 	struct torrent_handle;
 
+TORRENT_DEPR_NAMESPACE
+
 	// The add_torrent_params is a parameter pack for adding torrents to a
 	// session. The key fields when adding a torrent are:
 	//
@@ -366,17 +368,11 @@ namespace libtorrent {
 		// communicated forward into libtorrent via this field. If this is set, a
 		// fastresume_rejected_alert will be posted.
 		error_code internal_resume_data_error;
-#else
-		// hidden
-		// to maintain ABI compatibility
-		std::string deprecated5;
-		std::string deprecated1;
-		std::string deprecated2;
-		aux::noexcept_movable<std::vector<char>> deprecated3;
-		error_code deprecated4;
 #endif
 
 	};
+
+TORRENT_DEPR_NAMESPACE_END
 }
 
 #endif

@@ -47,6 +47,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #endif
 #include "libtorrent/aux_/disable_warnings_pop.hpp"
 
+#include "libtorrent/fwd.hpp"
 #include "libtorrent/address.hpp"
 #include "libtorrent/socket.hpp" // tcp::endpoint
 #include "libtorrent/span.hpp"
@@ -62,23 +63,12 @@ POSSIBILITY OF SUCH DAMAGE.
 
 namespace libtorrent {
 namespace aux {
-
 	struct session_impl;
-
 }
 
-	class entry;
-	struct open_file_state;
-	struct announce_entry;
-	class torrent_info;
-	struct torrent_plugin;
-	struct peer_info;
 #ifndef TORRENT_NO_DEPRECATE
 	struct peer_list_entry;
 #endif
-	struct torrent_status;
-	struct torrent_handle;
-	struct storage_interface;
 	class torrent;
 
 #ifndef BOOST_NO_EXCEPTIONS
@@ -91,6 +81,8 @@ namespace aux {
 	using deadline_flags_t = flags::bitfield_flag<std::uint8_t, struct deadline_flags_tag>;
 	using resume_data_flags_t = flags::bitfield_flag<std::uint8_t, struct resume_data_flags_tag>;
 	using queue_position_t = aux::strong_typedef<int, struct queue_position_tag>;
+
+TORRENT_IPV6_NAMESPACE
 
 	// holds the state of a block in a piece. Who we requested
 	// it from and how far along we are at downloading it.
@@ -221,12 +213,10 @@ namespace aux {
 		// any of ``fast``, ``medium`` or ``slow`` as soon as a peer want to
 		// download from it.
 		state_t TORRENT_DEPRECATED_MEMBER piece_state;
-#else
-		// hidden
-		enum deprecated_state_t { none, slow, medium, fast };
-		deprecated_state_t deprecated_piece_state;
 #endif
 	};
+
+TORRENT_IPV6_NAMESPACE_END
 
 	// for std::hash (and to support using this type in unordered_map etc.)
 	TORRENT_EXPORT std::size_t hash_value(torrent_handle const& h);

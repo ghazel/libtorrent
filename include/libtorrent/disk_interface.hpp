@@ -38,6 +38,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <string>
 #include <memory>
 
+#include "libtorrent/fwd.hpp"
 #include "libtorrent/units.hpp"
 #include "libtorrent/disk_buffer_holder.hpp"
 #include "libtorrent/aux_/vector.hpp"
@@ -50,17 +51,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 namespace libtorrent {
 
-	struct storage_interface;
-	struct peer_request;
 	struct disk_observer;
-	struct add_torrent_params;
-	struct cache_status;
 	struct disk_buffer_holder;
 	struct counters;
-	struct settings_pack;
-	struct storage_params;
-	struct storage_error;
-	class file_storage;
 
 	struct storage_holder;
 

@@ -36,7 +36,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <thread>
 
 #include "libtorrent/config.hpp"
-#include "libtorrent/build_config.hpp"
 #include "libtorrent/io_service.hpp"
 #include "libtorrent/settings_pack.hpp"
 #include "libtorrent/session_handle.hpp"
@@ -87,16 +86,10 @@ namespace libtorrent {
 	{ set = high_performance_seed(); }
 #endif
 
-#ifndef TORRENT_CFG
-#error TORRENT_CFG is not defined!
-#endif
-
-	void TORRENT_EXPORT TORRENT_CFG();
-
 namespace aux {
 
-		struct session_impl;
-	}
+	struct session_impl;
+}
 
 	struct disk_interface;
 	struct counters;
@@ -187,7 +180,6 @@ namespace aux {
 		// will take effect before the session starts up.
 		explicit session(session_params params = session_params())
 		{
-			TORRENT_CFG();
 			start(std::move(params), nullptr);
 		}
 
@@ -206,7 +198,6 @@ namespace aux {
 		// 	destruct the session_proxy object.
 		session(session_params params, io_service& ios)
 		{
-			TORRENT_CFG();
 			start(std::move(params), &ios);
 		}
 
@@ -224,7 +215,6 @@ namespace aux {
 		session(settings_pack pack
 			, session_flags_t const flags = start_default_features | add_default_plugins)
 		{
-			TORRENT_CFG();
 			start(flags, std::move(pack), nullptr);
 		}
 
@@ -253,7 +243,6 @@ namespace aux {
 			, io_service& ios
 			, session_flags_t const flags = start_default_features | add_default_plugins)
 		{
-			TORRENT_CFG();
 			start(flags, std::move(pack), &ios);
 		}
 
@@ -275,7 +264,6 @@ namespace aux {
 			, session_flags_t const flags = start_default_features | add_default_plugins
 			, alert_category_t const alert_mask = alert::error_notification)
 		{
-			TORRENT_CFG();
 			settings_pack pack;
 			pack.set_int(settings_pack::alert_mask, int(alert_mask));
 			pack.set_str(settings_pack::peer_fingerprint, print.to_string());
@@ -297,7 +285,6 @@ namespace aux {
 			, session_flags_t const flags = start_default_features | add_default_plugins
 			, alert_category_t const alert_mask = alert::error_notification)
 		{
-			TORRENT_CFG();
 			TORRENT_ASSERT(listen_port_range.first > 0);
 			TORRENT_ASSERT(listen_port_range.first <= listen_port_range.second);
 

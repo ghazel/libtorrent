@@ -38,6 +38,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef TORRENT_FWD_HPP
 #define TORRENT_FWD_HPP
 
+#include "libtorrent/config.hpp"
+
 namespace libtorrent {
 '''
 
@@ -50,11 +52,9 @@ namespace lt = libtorrent;
 #endif // TORRENT_FWD_HPP
 '''
 
-classes = os.popen('git grep TORRENT_EXPORT').read().split('\n')
+classes = os.popen('git grep "\(TORRENT_EXPORT\|TORRENT_DEPRECATED_EXPORT\|^TORRENT_[A-Z0-9]\+_NAMESPACE\)"').read().split('\n')
 
-deprecated_classes = os.popen('git grep TORRENT_DEPRECATED_EXPORT').read().split('\n')
-
-def filter_classes(classes, keyword):
+def print_classes(out, classes, keyword):
 	current_file = ''
 	ret = ''
 	dht_ret = ''
@@ -68,36 +68,43 @@ def filter_classes(classes, keyword):
 		this_file = line[0].strip()
 		decl = ':'.join(line[1:]).strip().split(' ')
 
+		if 'TORRENT_DEPR_NAMESPACE' in line[1] \
+			or 'TORRENT_ASSRT_NAMESPACE' in line[1] \
+			or 'TORRENT_IPV6_NAMESPACE' in line[1]:
+			if this_file != current_file:
+				out.write('\n// ' + this_file + '\n')
+			current_file = this_file;
+			out.write(line[1])
+			out.write('\n')
+			continue
+
 		if decl[0].strip() not in ['struct', 'class']: continue
 		# TODO: support TORRENT_DEPRECATED_EXPORT
 		if decl[1].strip() != keyword: continue
 
 		content = ''
 		if this_file != current_file:
-			content += '\n// ' + this_file + '\n'
+			out.write('\n// ' + this_file + '\n')
 		current_file = this_file;
 		decl = decl[0] + ' ' + decl[2]
 		if not decl.endswith(';'): decl += ';'
 		content += decl + '\n'
 		if 'kademlia' in this_file:
-			dht_ret += content
+			out.write('namespace dht {\n')
+			out.write(content)
+			out.write('}\n')
 		else:
-			ret += content
-
-	if dht_ret == '':
-		return ret
-	else:
-		return ret + '\nnamespace dht {\n' + dht_ret + '\n}\n'
+			out.write(content)
 
 os.remove('include/libtorrent/fwd.hpp')
 with open('include/libtorrent/fwd.hpp', 'w+') as f:
 	f.write(file_header)
 
-	f.write(filter_classes(classes, 'TORRENT_EXPORT'));
+	print_classes(f, classes, 'TORRENT_EXPORT');
 
 	f.write('\n#ifndef TORRENT_NO_DEPRECATE\n')
 
-	f.write(filter_classes(deprecated_classes, 'TORRENT_DEPRECATED_EXPORT'));
+	print_classes(f, classes, 'TORRENT_DEPRECATED_EXPORT');
 
 	f.write('\n#endif // TORRENT_NO_DEPRECATE')
 

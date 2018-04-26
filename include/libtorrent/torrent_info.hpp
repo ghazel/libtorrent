@@ -43,6 +43,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "libtorrent/aux_/disable_warnings_pop.hpp"
 
 #include "libtorrent/config.hpp"
+#include "libtorrent/fwd.hpp"
 #include "libtorrent/bdecode.hpp"
 #include "libtorrent/time.hpp"
 #include "libtorrent/assert.hpp"
@@ -58,9 +59,6 @@ POSSIBILITY OF SUCH DAMAGE.
 namespace libtorrent {
 
 	class peer_connection;
-	class entry;
-	struct announce_entry;
-	struct lazy_entry;
 
 	// internal, exposed for the unit test
 	TORRENT_EXTRA_EXPORT void sanitize_append_path_element(std::string& path

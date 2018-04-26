@@ -34,6 +34,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TORRENT_SESSION_INTERFACE_HPP_INCLUDED
 
 #include "libtorrent/config.hpp"
+#include "libtorrent/fwd.hpp"
 #include "libtorrent/address.hpp"
 #include "libtorrent/io_service.hpp"
 #include "libtorrent/time.hpp"
@@ -64,9 +65,6 @@ namespace libtorrent {
 
 	class peer_connection;
 	class torrent;
-#ifndef TORRENT_NO_DEPRECATE
-	struct pe_settings;
-#endif
 	struct peer_class_set;
 	struct bandwidth_channel;
 	struct bandwidth_manager;
@@ -78,12 +76,7 @@ namespace libtorrent {
 	struct tracker_request;
 	struct request_callback;
 	struct utp_socket_manager;
-	struct block_info;
 	struct external_ip;
-	struct torrent_handle;
-	struct ip_filter;
-	class port_filter;
-	struct settings_pack;
 	struct torrent_peer_allocator_interface;
 	struct counters;
 	struct resolver_interface;

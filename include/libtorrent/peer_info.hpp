@@ -58,6 +58,8 @@ namespace libtorrent {
 	// direction
 	using bandwidth_state_flags_t = flags::bitfield_flag<std::uint8_t, struct bandwidth_state_flags_tag>;
 
+TORRENT_DEPR_NAMESPACE
+
 	// holds information and statistics about one peer
 	// that libtorrent is connected to
 	struct TORRENT_EXPORT peer_info
@@ -317,8 +319,6 @@ namespace libtorrent {
 		// an estimate of the rate this peer is downloading at, in
 		// bytes per second.
 		int remote_dl_rate;
-#else
-		int deprecated_remote_dl_rate;
 #endif
 
 		// the number of bytes this peer has pending in the disk-io thread.
@@ -414,8 +414,9 @@ namespace libtorrent {
 		// have got this amount of free download.
 		std::int64_t load_balancing;
 #endif
-
 	};
+
+TORRENT_DEPR_NAMESPACE_END
 
 #ifndef TORRENT_NO_DEPRECATE
 	// internal

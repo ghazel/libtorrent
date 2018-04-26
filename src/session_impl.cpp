@@ -76,7 +76,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "libtorrent/lsd.hpp"
 #include "libtorrent/instantiate_connection.hpp"
 #include "libtorrent/peer_info.hpp"
-#include "libtorrent/build_config.hpp"
 #include "libtorrent/random.hpp"
 #include "libtorrent/magnet_uri.hpp"
 #include "libtorrent/aux_/session_settings.hpp"
@@ -516,10 +515,8 @@ namespace aux {
 
 #ifndef TORRENT_DISABLE_LOGGING
 
-		session_log("config: %s version: %s revision: %s"
-			, TORRENT_CFG_STRING
-			, LIBTORRENT_VERSION
-			, LIBTORRENT_REVISION);
+		session_log("version: %s revision: %s"
+			, LIBTORRENT_VERSION, LIBTORRENT_REVISION);
 
 #endif // TORRENT_DISABLE_LOGGING
 

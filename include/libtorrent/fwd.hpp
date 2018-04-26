@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2017-2018, Arvid Norberg
+Copyright (c) 2017, Arvid Norberg
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -33,15 +33,20 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef TORRENT_FWD_HPP
 #define TORRENT_FWD_HPP
 
+#include "libtorrent/config.hpp"
+
 namespace libtorrent {
 
 // include/libtorrent/add_torrent_params.hpp
+TORRENT_DEPR_NAMESPACE
 struct add_torrent_params;
+TORRENT_DEPR_NAMESPACE_END
 
 // include/libtorrent/alert.hpp
 class alert;
 
 // include/libtorrent/alert_types.hpp
+TORRENT_DEPR_NAMESPACE
 struct torrent_alert;
 struct peer_alert;
 struct tracker_alert;
@@ -134,10 +139,13 @@ struct dht_live_nodes_alert;
 struct session_stats_header_alert;
 struct dht_sample_infohashes_alert;
 struct block_uploaded_alert;
+TORRENT_DEPR_NAMESPACE_END
 
 // include/libtorrent/announce_entry.hpp
 struct announce_endpoint;
+TORRENT_DEPR_NAMESPACE
 struct announce_entry;
+TORRENT_DEPR_NAMESPACE_END
 
 // include/libtorrent/bdecode.hpp
 struct bdecode_node;
@@ -167,7 +175,9 @@ struct peer_plugin;
 struct crypto_plugin;
 
 // include/libtorrent/file_pool.hpp
+TORRENT_ASSRT_NAMESPACE
 struct file_pool;
+TORRENT_ASSRT_NAMESPACE_END
 
 // include/libtorrent/file_storage.hpp
 struct file_slice;
@@ -180,8 +190,28 @@ class hasher;
 class hasher512;
 
 // include/libtorrent/ip_filter.hpp
+TORRENT_IPV6_NAMESPACE
 struct ip_filter;
+TORRENT_IPV6_NAMESPACE_END
 class port_filter;
+
+// include/libtorrent/kademlia/dht_settings.hpp
+namespace dht {
+struct dht_settings;
+}
+
+// include/libtorrent/kademlia/dht_state.hpp
+namespace dht {
+struct dht_state;
+}
+
+// include/libtorrent/kademlia/dht_storage.hpp
+namespace dht {
+struct dht_storage_counters;
+}
+namespace dht {
+struct dht_storage_interface;
+}
 
 // include/libtorrent/peer_class.hpp
 struct peer_class_info;
@@ -194,7 +224,9 @@ struct peer_connection_handle;
 struct bt_peer_connection_handle;
 
 // include/libtorrent/peer_info.hpp
+TORRENT_DEPR_NAMESPACE
 struct peer_info;
+TORRENT_DEPR_NAMESPACE_END
 
 // include/libtorrent/peer_request.hpp
 struct peer_request;
@@ -226,8 +258,10 @@ struct storage_interface;
 struct storage_params;
 
 // include/libtorrent/torrent_handle.hpp
+TORRENT_IPV6_NAMESPACE
 struct block_info;
 struct partial_piece_info;
+TORRENT_IPV6_NAMESPACE_END
 struct torrent_handle;
 
 // include/libtorrent/torrent_info.hpp
@@ -235,28 +269,18 @@ struct web_seed_entry;
 class torrent_info;
 
 // include/libtorrent/torrent_status.hpp
+TORRENT_DEPR_NAMESPACE
 struct torrent_status;
-
-namespace dht {
-
-// include/libtorrent/kademlia/dht_settings.hpp
-struct dht_settings;
-
-// include/libtorrent/kademlia/dht_state.hpp
-struct dht_state;
-
-// include/libtorrent/kademlia/dht_storage.hpp
-struct dht_storage_counters;
-struct dht_storage_interface;
-
-}
+TORRENT_DEPR_NAMESPACE_END
 
 #ifndef TORRENT_NO_DEPRECATE
 
 // include/libtorrent/alert_types.hpp
+TORRENT_DEPR_NAMESPACE
 struct torrent_added_alert;
 struct mmap_cache_alert;
 struct torrent_update_alert;
+TORRENT_DEPR_NAMESPACE_END
 
 // include/libtorrent/file_storage.hpp
 struct file_entry;

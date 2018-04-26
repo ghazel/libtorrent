@@ -48,6 +48,8 @@ namespace libtorrent {
 	class file_storage;
 	struct open_file_state;
 
+TORRENT_ASSRT_NAMESPACE
+
 	// this is an internal cache of open file handles. It's primarily used by
 	// storage_interface implementations. It provides semi weak guarantees of
 	// not opening more file handles than specified. Given multiple threads,
@@ -122,6 +124,8 @@ namespace libtorrent {
 #endif
 		mutable std::mutex m_mutex;
 	};
+
+TORRENT_ASSRT_NAMESPACE_END
 }
 
 #endif

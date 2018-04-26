@@ -55,6 +55,8 @@ namespace libtorrent {
 #endif
 #endif
 
+TORRENT_DEPR_NAMESPACE
+
 	// holds a snapshot of the status of a torrent, as queried by
 	// torrent_handle::status().
 	struct TORRENT_EXPORT torrent_status
@@ -87,7 +89,7 @@ namespace libtorrent {
 			// The torrent is in the queue for being checked. But there
 			// currently is another torrent that are being checked.
 			// This torrent will wait for its turn.
-			queued_for_checking,
+			queued_for_checking TORRENT_DEPRECATED_ENUM,
 #else
 			// internal
 			unused_enum_for_backwards_compatibility,
@@ -130,9 +132,6 @@ namespace libtorrent {
 
 #ifndef TORRENT_NO_DEPRECATE
 		std::string error;
-#else
-		// internal
-		std::string _dummy_string_;
 #endif
 
 		// may be set to an error code describing why the torrent was paused, in
@@ -195,9 +194,6 @@ namespace libtorrent {
 		// the time the tracker want us to wait until we announce ourself
 		// again the next time.
 		time_duration announce_interval;
-#else
-		// hidden
-		time_duration deprecated_announce_interval_;
 #endif
 
 		// the URL of the last working tracker. If no tracker request has
@@ -436,12 +432,6 @@ namespace libtorrent {
 		int TORRENT_DEPRECATED_MEMBER active_time = 0;
 		int TORRENT_DEPRECATED_MEMBER finished_time = 0;
 		int TORRENT_DEPRECATED_MEMBER seeding_time = 0;
-#else
-		int deprecated_time_since_upload = 0;
-		int deprecated_time_since_download = 0;
-		int deprecated_active_time = 0;
-		int deprecated_finished_time = 0;
-		int deprecated_seeding_time = 0;
 #endif
 
 		// A rank of how important it is to seed the torrent, it is used to
@@ -456,16 +446,11 @@ namespace libtorrent {
 		// the number of seconds since this torrent acquired scrape data.
 		// If it has never done that, this value is -1.
 		int TORRENT_DEPRECATED_MEMBER last_scrape = 0;
-#else
-		int deprecated_last_scrape = 0;
 #endif
 
 #ifndef TORRENT_NO_DEPRECATE
 		// the priority of this torrent
 		int TORRENT_DEPRECATED_MEMBER priority = 0;
-#else
-		// hidden
-		int deprecated_priority = 0;
 #endif
 
 		// the main state the torrent is in. See torrent_status::state_t.
@@ -512,15 +497,6 @@ namespace libtorrent {
 		// true when the torrent is in sequential download mode. In this mode
 		// pieces are downloaded in order rather than rarest first.
 		bool TORRENT_DEPRECATED_MEMBER sequential_download = false;
-#else
-		// hidden
-		bool deprecated_ip_filter_applies = false;
-		bool deprecated_upload_mode = false;
-		bool deprecated_share_mode = false;
-		bool deprecated_super_seeding = false;
-		bool deprecated_paused = false;
-		bool deprecated_auto_managed = false;
-		bool deprecated_sequential_download = false;
 #endif
 
 		// true if all pieces have been downloaded.
@@ -547,9 +523,6 @@ namespace libtorrent {
 		// seed mode, it will leave seed mode once all pieces have been checked
 		// or as soon as one piece fails the hash check.
 		bool TORRENT_DEPRECATED_MEMBER seed_mode = false;
-#else
-		// hidden
-		bool deprecated_seed_mode = false;
 #endif
 
 		// this is true if this torrent's storage is currently being moved from
@@ -562,9 +535,6 @@ namespace libtorrent {
 		// and still not loaded into RAM, in case it has not had any peers interested in it
 		// yet. Torrents are loaded on demand.
 		bool TORRENT_DEPRECATED_MEMBER is_loaded = false;
-#else
-		// hidden
-		bool deprecated_is_loaded;
 #endif
 
 		// these are set to true if this torrent is allowed to announce to the
@@ -580,9 +550,6 @@ namespace libtorrent {
 		// on this torrent. For more information, see
 		// torrent_handle::stop_when_ready().
 		bool TORRENT_DEPRECATED_MEMBER stop_when_ready = false;
-#else
-		// hidden
-		bool deprecated_stop_when_ready = false;
 #endif
 
 		// the info-hash for this torrent
@@ -601,6 +568,8 @@ namespace libtorrent {
 		// information, see ``torrent_handle::flags()``.
 		torrent_flags_t flags{};
 	};
+
+TORRENT_DEPR_NAMESPACE_END
 }
 
 namespace std

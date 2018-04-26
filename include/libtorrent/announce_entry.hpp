@@ -34,6 +34,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TORRENT_ANNOUNCE_ENTRY_HPP_INCLUDED
 
 #include "libtorrent/config.hpp"
+#include "libtorrent/fwd.hpp"
 #include "libtorrent/time.hpp"
 #include "libtorrent/error_code.hpp"
 #include "libtorrent/string_view.hpp"
@@ -135,6 +136,8 @@ namespace libtorrent {
 		bool is_working() const { return fails == 0; }
 	};
 
+TORRENT_DEPR_NAMESPACE
+
 	// this class holds information about one bittorrent tracker, as it
 	// relates to a specific torrent.
 	struct TORRENT_EXPORT announce_entry
@@ -195,14 +198,6 @@ namespace libtorrent {
 		// internal
 		bool TORRENT_DEPRECATED_MEMBER triggered_manually:1;
 		bool TORRENT_DEPRECATED_MEMBER updating:1;
-#else
-		// hidden
-		std::uint8_t deprecated_fails:7;
-		bool deprecated_send_stats:1;
-		bool deprecated_start_sent:1;
-		bool deprecated_complete_sent:1;
-		bool deprecated_triggered_manually:1;
-		bool deprecated_updating:1;
 #endif
 
 		// reset announce counters and clears the started sent flag.
@@ -231,6 +226,8 @@ namespace libtorrent {
 		// trims whitespace characters from the beginning of the URL.
 		void trim();
 	};
+
+TORRENT_DEPR_NAMESPACE_END
 
 }
 

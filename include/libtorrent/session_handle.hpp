@@ -34,6 +34,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TORRENT_SESSION_HANDLE_HPP_INCLUDED
 
 #include "libtorrent/config.hpp"
+#include "libtorrent/fwd.hpp"
 #include "libtorrent/entry.hpp"
 #include "libtorrent/torrent_handle.hpp"
 #include "libtorrent/add_torrent_params.hpp"
@@ -57,13 +58,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 namespace libtorrent {
 
-	struct plugin;
-	struct torrent_plugin;
 	class torrent;
-	struct ip_filter;
-	class port_filter;
-	class alert;
-	struct settings_pack;
 
 #ifndef TORRENT_NO_DEPRECATE
 	struct session_status;

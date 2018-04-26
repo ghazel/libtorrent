@@ -47,14 +47,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <libtorrent/kademlia/find_data.hpp>
 #include <libtorrent/kademlia/item.hpp>
 
+#include <libtorrent/fwd.hpp>
 #include <libtorrent/socket.hpp> // for udp::endpoint
 #include <libtorrent/string_view.hpp>
 #include <libtorrent/aux_/listen_socket_handle.hpp>
 
 namespace libtorrent {
-
 	struct counters;
-	struct dht_routing_bucket;
 }
 
 namespace libtorrent { namespace dht {
